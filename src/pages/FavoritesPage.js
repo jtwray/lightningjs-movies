@@ -90,6 +90,11 @@ export class FavoritesPage extends Lightning.Component {
         this.myC.add(this.movieList);
         this.myC.first();
     }
+    _active() {
+        this.favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies'));
+        this.movieList = this.handleCreateMovieList(this.favoriteMovies)
+        this.myC.reload(this.movieList)
+    }
 
     _handleUp() { Router.focusWidget('Menu') }    //this.historyState
 }
