@@ -3,15 +3,15 @@
 ## com.domain.app.movies
 
 ### Getting started
-> get an API KEY from THE MOVIEDB @ https://www.themoviedb.org/ 
+> update the value of APP_MOVIEDB_API_KEY with your API KEY from THE MOVIEDB @ https://www.themoviedb.org/ 
 
-> Open .env
+> update the value of APP_MOVIEDB_BASE_URL to https://api.themoviedb.org/3
 
-> update the value of APP_MOVIEDB_API_KEY with your API KEY
 
+> /.env
 ```
-.env
 APP_MOVIEDB_API_KEY=<YOUR KEY HERE>
+APP_MOVIEDB_BASE_URL=https://api.themoviedb.org/3
 ```
 
 > Before you follow the steps below, make sure you have the
