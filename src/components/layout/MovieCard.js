@@ -9,7 +9,7 @@ export class MovieCard extends Lightning.Component {
         flexItem: { minWidth: 220 },
 
         rect: true,
-        texture: Lightning.Tools.getRoundRect(200, 300, 4, 10, 0xff000000, false), //(w: number, h: number, radius: Lightning.Tools.CornerRadius, strokeWidth?: number | undefined, strokeColor?: number | undefined, fill?: boolean | undefined, fillColor?: number | undefined)
+        // texture: Lightning.Tools.getRoundRect(200, 300, 4, 10, 0xff000000, false), //(w: number, h: number, radius: Lightning.Tools.CornerRadius, strokeWidth?: number | undefined, strokeColor?: number | undefined, fill?: boolean | undefined, fillColor?: number | undefined)
         texture: Lightning.Tools.getRoundRect(200, 300), //(w: number, h: number, radius: Lightning.Tools.CornerRadius, strokeWidth?: number | undefined, strokeColor?: number | undefined, fill?: boolean | undefined, fillColor?: number | undefined)
         shader: {
           type: Lightning.shaders.RoundedRectangle,
