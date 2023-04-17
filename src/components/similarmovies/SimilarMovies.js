@@ -1,70 +1,69 @@
 import { Lightning, Utils, Router } from '@lightningjs/sdk'
-import { similarMovies } from '../lib/api'
-
+import { getSimilarMoviesByMovieID } from '../../lib/api'
+import { MovieCard } from '../layout/MovieCard'
 export class SimilarMovies extends Lightning.Component {
-  static _template() {
-    return {
-      Background: {
-        w: 1920,
-        h: 1080,
-        rect: true,
-        color: 0xffdaa0004,
-        src: '',
-      },
-      Title: {
-        x: 960,
-        y: 50,
-        mount: 0.5,
-        text: {
-          text: 'About',
-          fontSize: 64,
-        },
-      },
-      SimilarMovies: {
-        type: SimilarMovies,
-      },
-      // Logo: {
-      //     x: 960,
-      //     y: 540,
-      //     mount: 0.5,
-      //     src: Utils.asset('images/logo.png'),
-      // },
+    static _template() {
+        return {
+            SimilarMoviesGrid: {
+                flex: { direction: "column", justifyContent: 'center', wrap: true },
+                y: 0,
+                h: 1080, w: 1920,
+            },
+        }
     }
-  }
+    _init() {
+        this.currItemIDX = 0;
+    }
+    set similarToMovie(data) {
+        this._similarToMovie = data;
+        this.handleSetSimilarMovies(this._similarToMovie.id);
+    }
 
-  _handleEnter() {
-    Router.navigate('home')
-  }
-  _handleUp() {
-    Router.navigate('Video')
-  }
+    // focus and events
+    getCurrentIcon() {
+        return this.tag('SimilarMoviesGrid').children[this.currItemIDX]
+    }
+    _getFocused() { return this.getCurrentIcon() }
 
-  // pageTransition(){
-  //     return 'fade'
-  // }
-  updateBackgroundImage(backdrop_path) {
-    // this.tag("Background").patch({ src: moviesList.results[currMovieIDX].backdrop_path })
-    this.tag('Background').src = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
-  }
-  updateBackgroundTitle(movieTitle) {
-    // this.tag("Background").patch({ src: moviesList.results[currMovieIDX].movieTitle })
-    this.tag('Title').text.text = movieTitle
-  }
+    _handleLeft() {
+        this.currItemIDX > 0 ?
+            this.currItemIDX-- :
+            this.currItemIDX = this.tag('SimilarMoviesGrid').children.length;
+    }
+    _handleRight() {
+        this.currItemIDX < this.tag('SimilarMoviesGrid').children.length ?
+            this.currItemIDX++ : this.currItemIDX = 0
+    }
 
-  pageTransition() {
-    return 'up'
-  }
-  _init() {
-    this.movie = ''
-    console.log('DETAILS COMPONENT INIT!', 'backdrop_path:', this.movie.backdrop_path)
-  }
-  set params(data) {
-    this.message = data.message
-    this.movie = data.movie
-    console.log({ data: this.message, movie: this.movie })
-    // this.tag('Background').patch({ src: this.movie.backdrop_path })
-    this.updateBackgroundImage(this.movie.backdrop_path)
-    this.updateBackgroundTitle(this.movie.title)
-    // alert(data.message);
-  }
+    async handleSetSimilarMovies(movieID) {
+        const similarMovies = await getSimilarMoviesByMovieID(movieID);
+        const movieCardsList = similarMovies.results.map((movie, idx) => ({
+            flexItem: { minWidth: 220, minHeight: 320, },
+            type: MovieCard, movie, testValue: 'testvaluestring',
+            shader: idx == this.currItemIDX ? {
+                type: Lightning.shaders.RoundedRectangle,
+                radius: 15,
+            } : {},
+        }))
+        this.tag('SimilarMoviesGrid').patch({
+            h: 1080, w: 1920,
+            flex: { direction: "column", justifyContent: 'center', wrap: true, },
+            children: movieCardsList
+        })
+    }
+
+    historyState() {
+        return {
+            // movie: this.movie,
+            similarToMovie: this._similarToMovie,
+            movieID: this.movieID,
+            movieDetailsMovie: this._similarToMovie
+            // focusIndex: 12,
+            // someVal: Math.random()
+        }
+    }
+    pageTransition() {
+        return 'up'
+    }
 }
+
