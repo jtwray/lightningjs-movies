@@ -34,7 +34,7 @@ export class SimilarMovies extends Lightning.Component {
             //     x: 960,
             //     y: 540,
             //     mount: 0.5,
-            //     src: Utils.asset('images/logo.png'),
+            //     src: Utils.asset("images/logo.png"),
             // },
         }
     }
@@ -52,9 +52,15 @@ export class SimilarMovies extends Lightning.Component {
         return similarMovies
     }
 
+
     updateBackgroundImage(backdrop_path) {
-        // this.tag("Background").patch({ src: moviesList.results[currMovieIDX].backdrop_path })
-        this.tag('Background').src = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+        let newBackDrop;
+        if (backdrop_path === "images/background.png") {
+            newBackDrop = Utils.asset(backdrop_path);
+        } else {
+            newBackDrop = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+        }
+        this.tag('Background').src = newBackDrop;
     }
     updateBackgroundTitle(movieTitle) {
         this.tag('Title').text.text = movieTitle
