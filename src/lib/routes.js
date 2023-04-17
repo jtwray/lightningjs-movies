@@ -8,8 +8,9 @@ export default {
   routes: [
     {
       path: '$',
-      component: Boot
+      component: Boot,
     },
+
     {
       path: 'home',
       component: HomePage,
@@ -33,17 +34,15 @@ export default {
       component: FavoritesPage,
       name: 'favorites',
       widgets: ['Menu'],
-    }
+    },
   ],
   beforeEachRoute(from, to) {
-    let isLoggedIn = true;
+    let isLoggedIn = true
     if (!isLoggedIn && to._hash == 'User') {
       return from
     } else {
       return true
     }
-
   },
-  afterEachRoute(to) {
-  },
+  afterEachRoute(to) { },
 }
