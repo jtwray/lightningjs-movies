@@ -80,7 +80,7 @@ export class MovieCardLarge extends Lightning.Component {
 
   updatePosterImage(poster_path) {
     let newPoster
-    if (poster_path === 'images/logo.png') {
+    if (poster_path === 'images/logo.png' || poster_path === null) {
       newPoster = Utils.asset('images/logo.png')
     } else {
       newPoster = `https://image.tmdb.org/t/p/w200/${poster_path}`

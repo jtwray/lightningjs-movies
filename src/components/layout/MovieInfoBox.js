@@ -112,7 +112,7 @@ export class MovieInfoBox extends Lightning.Component {
 
   updatePosterImage(poster_path) {
     let newPoster
-    if (poster_path === 'images/logo.png') {
+    if (poster_path === 'images/logo.png' || poster_path === null) {
       newPoster = Utils.asset('images/logo.png')
     } else {
       newPoster = `https://image.tmdb.org/t/p/w200/${poster_path}`
@@ -140,8 +140,8 @@ export class MovieInfoBox extends Lightning.Component {
 
   updateBackgroundImage(backdrop_path) {
     let newBackDrop
-    if (backdrop_path === 'images/background.png') {
-      newBackDrop = Utils.asset(backdrop_path)
+    if (backdrop_path === 'images/background.png' || backdrop_path === null) {
+      newBackDrop = Utils.asset('images/background.png')
     } else {
       newBackDrop = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
     }

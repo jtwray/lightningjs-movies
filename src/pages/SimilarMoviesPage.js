@@ -38,19 +38,19 @@ export class SimilarMoviesPage extends Lightning.Component {
         //this.historyState
     }
 
-    //  ui and template updates 
+    //  ui and template updates
 
     // updateBackgroundImage(backdrop_path) {
     //     let newBackDrop;
     //     if (backdrop_path === "images/background.png") {
-    //         newBackDrop = Utils.asset(backdrop_path);
+    //         newBackDrop = Utils.asset('images/background.png');
     //     } else {
     //         newBackDrop = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
     //     }
     //     this.tag('Background').src = newBackDrop;
     //     this.tag('SimilarMovies').src = newBackDrop;
-    // } 
-    
+    // }
+
     updateBackgroundTitle(movieTitle) { }
     setSimilarMovies(movieID) {
         this.tag('SimilarMovies').patch({

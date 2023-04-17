@@ -59,13 +59,12 @@ export class HomePage extends Lightning.Component {
     this.tag('Synopsis_Shortened').patch({ children: [{ type: Synopsis_Shortened, movie: currentMovie, isfavorite: !!this?.favoriteMovies?.filter(movie => movie?.id == currentMovie?.id)?.length }] })
   }
   handleChangeBackgroundImage(backdrop_path) {
-    let newBackDrop;
-    if (backdrop_path === "images/background.png") {
-      newBackDrop = Utils.asset(backdrop_path);
+    let newBackDrop
+    if (backdrop_path === 'images/background.png' || backdrop_path === null) {
+      newBackDrop = Utils.asset('images/background.png')
     } else {
       newBackDrop = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
     }
-    this.src = newBackDrop;
     this.tag('Background').patch({ src: newBackDrop, alpha: .51 })
   }
   pageTransition() {
