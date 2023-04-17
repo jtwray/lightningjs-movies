@@ -3,6 +3,16 @@
 ## com.domain.app.movies
 
 ### Getting started
+> update the value of APP_MOVIEDB_API_KEY with your API KEY from THE MOVIEDB @ https://www.themoviedb.org/
+
+> update the value of APP_MOVIEDB_BASE_URL to https://api.themoviedb.org/3
+
+
+> /.env
+```
+APP_MOVIEDB_API_KEY=<YOUR KEY HERE>
+APP_MOVIEDB_BASE_URL=https://api.themoviedb.org/3
+```
 
 > Before you follow the steps below, make sure you have the
 [Lightning-CLI](https://rdkcentral.github.io/Lightning-CLI/#/) installed _globally_ only your system
@@ -15,9 +25,11 @@ npm install -g @lightningjs/cli
 
 1. Install the NPM dependencies by running `npm install`
 
-2. Build the App using the _Lightning-CLI_ by running `lng build` inside the root of your project
+2. add moviedb api key to .env
 
-3. Fire up a local webserver and open the App in a browser by running `lng serve` inside the root of your project
+3. Build the App using the _Lightning-CLI_ by running `lng build` inside the root of your project
+
+4. Fire up a local webserver and open the App in a browser by running `lng serve` inside the root of your project
 
 #### Developing the App
 
