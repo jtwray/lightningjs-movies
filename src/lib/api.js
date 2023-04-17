@@ -1,5 +1,5 @@
 
-const BASE_URL = 'https://api.themoviedb.org/3'
+const BASE_URL =process.env.APP_MOVIEDB_BASE_URL 
 const API_KEY = process.env.APP_MOVIEDB_API_KEY
 const UN = process.env.APP_MOVIEDB_UN
 const PW = process.env.APP_MOVIEDB_PW
@@ -18,9 +18,9 @@ async function createToken() {
 
 async function createSession(request_token) {
   return postMovieAPI(`/authentication/token/validate_with_login?api_key=${API_KEY}`, {
-    "username": "jamestuckerwray",
-    "password": "xzNmQQsTu_E4Pq#",
-    "request_token": "1531f1a558c8357ce8990cf887ff196e8f5402ec"
+    "username": UN,
+    "password": PW,
+    "request_token": request_token
   })
 
 }
