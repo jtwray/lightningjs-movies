@@ -24,7 +24,8 @@ export class MovieCardLarge extends Lightning.Component {
     }
     _init() {
         const { poster_path, title, id } = this.movie;
-        this.tag('Card.Poster').src = `https://image.tmdb.org/t/p/w200/${poster_path}`
+        this.updatePosterImage(poster_path);
+        // this.tag('Card.Poster').src = `https://image.tmdb.org/t/p/w200/${poster_path}`
         this.tag('Card').page = this.movie.id
 
         this._animationDemoActive = this.tag('Card').animation(
@@ -63,6 +64,29 @@ export class MovieCardLarge extends Lightning.Component {
             }
         )
     }
+
+    // updatePosterImage(poster_path) {
+    //     let newPoster;
+    //     if (poster_path === "images/logo.png") {
+    //         newPoster = Utils.asset("images/logo.png");
+    //     } else {
+    //         newPoster = `https://image.tmdb.org/t/p/w200/${poster_path}`
+    //     }
+    //     this.tag('Card.Poster').src = newPoster;
+    // }
+
+    updatePosterImage(poster_path) {
+        console.log({ poster_path })
+        let newPoster;
+        if (poster_path === "images/logo.png") {
+          newPoster = Utils.asset("images/logo.png");
+        } else {
+          newPoster = `https://image.tmdb.org/t/p/w200/${poster_path}`
+        }
+        this.tag('Card.Poster').src = newPoster;
+      }
+    
+
     pageTransition() {
         return 'fade'
     }

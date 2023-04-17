@@ -98,22 +98,53 @@ export class MovieInfoBox extends Lightning.Component {
             }
         }
     }
+
+
+    //   updatePosterImage(poster_path) {
+    //     let newPoster;//movies/static/"images/logo.png"
+    //     if (poster_path === "images/logo.png") {
+    //       newPoster = Utils.asset("images/logo.png");
+    //     } else {
+    //       newPoster = `https://image.tmdb.org/t/p/w200/${poster_path}`
+    //     }
+    //     this.tag('Top.Poster').src = newPoster;
+    //   }
+
+    updatePosterImage(poster_path) {
+        console.log({ poster_path })
+        let newPoster;
+        if (poster_path === "images/logo.png") {
+            newPoster = Utils.asset("images/logo.png");
+        } else {
+            newPoster = `https://image.tmdb.org/t/p/w200/${poster_path}`
+        }
+        this.tag('Top.Poster').src = newPoster;
+    }
+
     _init() {
         this.tag('Top.Metadata.Title').text.text = this.movieInfoBox.title;
         this.tag('Bottom.RatingAndStars.Stars').text.text = this.movieInfoBox.vote_average + '⭐' + " out of " + this.movieInfoBox.vote_count + " votes";
         this.tag('Overview').text.text = this.movieInfoBox.overview;
         this.tag('Top.Metadata.MetadataBTM.Language').text.text = " | " + this.movieInfoBox.original_language;
         this.tag('Top.Metadata.MetadataBTM.ReleaseDate').text.text = "released: " + this.movieInfoBox.release_date;
-        this.tag('Top.Poster').src = `https://image.tmdb.org/t/p/w500/${this.movieInfoBox.poster_path}`;
+        // this.tag('Top.Poster').src = `https://image.tmdb.org/t/p/w500/${this.movieInfoBox.poster_path}`;
+        this.updatePosterImage(this.movieInfoBox.poster_path)
 
-        
+
         // this.tag('CardContentHorizontalLargeComponent').src = `https://image.tmdb.org/t/p/w500/${this.movieInfoBox.poster_path}`;
         // this.tag('CardContentHorizontalLargeComponent').metadata.title = this.movieInfoBox.title;
         // this.tag('CardContentHorizontalLargeComponent').metadata.details = this.movieInfoBox.release_date+ " | " + this.movieInfoBox.original_language+  this.movieInfoBox.vote_average + '⭐' + " out of " + this.movieInfoBox.vote_count + " votes";
         // this.tag('CardContentHorizontalLargeComponent').metadata.description = this.movieInfoBox.overview;
     }
+
     updateBackgroundImage(backdrop_path) {
-        this.tag('Background').src = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+        let newBackDrop;
+        if (backdrop_path === "images/background.png") {
+            newBackDrop = Utils.asset(backdrop_path);
+        } else {
+            newBackDrop = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+        }
+        this.tag('Container.Background').src = newBackDrop;
     }
     updateBackgroundTitle(movieTitle) {
         this.tag('Top.Metadata.Title').text.text = movieTitle;

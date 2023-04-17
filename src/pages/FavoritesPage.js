@@ -59,9 +59,22 @@ export class FavoritesPage extends Lightning.Component {
     }
 
 
-    handleChangeBackgroundImage(backdrop_path) {
-        this.src = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+    updateBackgroundImage(backdrop_path) {
+      
     }
+
+    handleChangeBackgroundImage(backdrop_path) {
+        let newBackDrop;
+        if (backdrop_path === "images/background.png") {
+            newBackDrop = Utils.asset(backdrop_path);
+        } else {
+            newBackDrop = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+        }
+        this.src = newBackDrop;
+    }
+    // handleChangeBackgroundImage(backdrop_path) {
+    //     this.src = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+    // }
     handleChangeSynopsis(currentMovie) {
         this.tag('Synopsis_Shortened').patch({
             children: [{

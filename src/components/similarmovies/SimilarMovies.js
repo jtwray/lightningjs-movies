@@ -1,5 +1,5 @@
 import { Lightning, Utils, Router } from '@lightningjs/sdk'
-import { getSimilarMoviesByMovieID } from '../../lib/api'
+import { getSimilarMoviesByMovieID, getUpcomingMovies } from '../../lib/api'
 import { MovieCard } from '../layout/MovieCard'
 export class SimilarMovies extends Lightning.Component {
     static _template() {
@@ -36,7 +36,10 @@ export class SimilarMovies extends Lightning.Component {
     }
 
     async handleSetSimilarMovies(movieID) {
-        const similarMovies = await getSimilarMoviesByMovieID(movieID);
+        let similarMovies;
+        if (movieID === 0) { similarMovies = await getUpcomingMovies(); }
+        else { similarMovies = await getSimilarMoviesByMovieID(movieID); }
+
         const movieCardsList = similarMovies.results.map((movie, idx) => ({
             flexItem: { minWidth: 220, minHeight: 320, },
             type: MovieCard, movie, testValue: 'testvaluestring',

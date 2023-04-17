@@ -78,10 +78,34 @@ export class MovieDetailsPage extends Lightning.Component {
         // updatedFavMovies.push(movie)
         localStorage.setItem('favoriteMovies', JSON.stringify(updatedFavMovies))
         // return await favoritesList_AddMovie(listID, movieID)
-    }
+    }   
     async handleFavoritesList_RemoveMovie(movieID) {
         let favMovies = JSON.parse(localStorage.getItem('favoriteMovies'));
         let updatedFavMovies = favMovies?.filter(movie => movie.id !== movieID)
+        if (updatedFavMovies.length === 0) {
+            updatedFavMovies = [{
+                "adult": false,
+                "backdrop_path": "images/background.png",
+                "genre_ids": [
+                    16,
+                    12,
+                    10751,
+                    14,
+                    35
+                ],
+                "id": 0,
+                "original_language": "en",
+                "original_title": "Favorite Movie Title",
+                "overview": "Add movies to the favorites list using the add to favorites button on Movie Details Screen.",
+                "popularity": 12929.143,
+                "poster_path": "images/logo.png",
+                "release_date": "2023-04-05",
+                "title": "Favorite Movie Title",
+                "video": false,
+                "vote_average": 10,
+                "vote_count": 896
+            },]
+        }
         localStorage.setItem('favoriteMovies', JSON.stringify(updatedFavMovies))
         // return await favoritesList_RemoveMovie(listID, movieID)
     }
@@ -103,8 +127,15 @@ export class MovieDetailsPage extends Lightning.Component {
     }
 
     // ui template updates
+   
     updateBackgroundImage(backdrop_path) {
-        this.tag('Container.Background').src = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+        let newBackDrop;
+        if (backdrop_path === "images/background.png") {
+            newBackDrop = Utils.asset(backdrop_path);
+        } else {
+            newBackDrop = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+        }
+        this.tag('Container.Background').src = newBackDrop;
     }
     updateMovieInfoBox(movieInfoBox) {
         this.tag('Container.MovieInfoBox')
